@@ -145,7 +145,7 @@
         //    _error("WARNING: URL may not be valid...");
         //    await new Promise(resolve => setTimeout(resolve, 2000));
         //}
-        let dataUrl = "http://localhost:8889/https://docs.misoenergy.org/marketreports/"+date.replace(/\D/g,'')+"_rt_lmp_final.csv"
+        let dataUrl = "https://twdc-cors.herokuapp.com/https://docs.misoenergy.org/marketreports/"+date.replace(/\D/g,'')+"_rt_lmp_final.csv"
 
 
 
