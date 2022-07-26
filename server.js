@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const cors_proxy = require('cors-anywhere');
 const app = express();
+require('polyfill-object.fromentries');
 
 // Listen on a specific host via the HOST environment variable
 var host = process.env.HOST || '0.0.0.0';
