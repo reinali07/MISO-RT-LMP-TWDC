@@ -126,7 +126,7 @@
                 //tableau.log(result.slice(0,4));
                 //console.log(result[0]);
                 table.appendRows(result);
-                doneCallback;
+                doneCallback();
 
             }
         });
