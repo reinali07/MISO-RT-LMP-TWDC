@@ -1,3 +1,11 @@
+function fromEntries(entries){
+    var res = {};
+    for(var i = 0; i < entries.length; i++) res[entries[i][0]] = entries[i][1];
+    return res;
+}
+if(!Object.fromEntries) Object.fromEntries = fromEntries;
+
+
 (function () {
     var myConnector = tableau.makeConnector();
     var url;
@@ -11,12 +19,6 @@
         return occurrences
     };
 
-    function fromEntries(entries){
-        var res = {};
-        for(var i = 0; i < entries.length; i++) res[entries[i][0]] = entries[i][1];
-        return res;
-    }
-    if(!Object.fromEntries) Object.fromEntries = fromEntries;
 
     function getDataTypes(keys,values) {
         //var datatypes = [];
