@@ -87,8 +87,8 @@
                 const cols = keys.map((k,i) => Object.fromEntries([['id',k],['dataType',datatypes[i]]]));
 
                 var tableSchema = {
-                    id: "RT_LMP_Final",
-                    alias: "RT_LMP_Final",
+                    id: "RT_LMP_Final_" + date.replace(/\D/g,''),
+                    alias: "RT_LMP_Final_" + date.replace(/\D/g,''),
                     columns: cols
                 };
                 
