@@ -38,6 +38,15 @@
         return maxType;
     };
 
+    myConnector.init = function(initCallback) {
+        if (tableau.phase == tableau.phaseEnum.interactivePhase && tableau.connectionData.length > 0) {
+            const conData = JSON.parse(tableau.connectionData);
+            $("#date").val(conData.date || "")
+        }
+
+        initCallback();
+    };
+
     myConnector.getSchema = function (schemaCallback) {
         //http://localhost:8889/https://docs.misoenergy.org/marketreports/20220721_rt_lmp_final.csv
         let conData = JSON.parse(tableau.connectionData);
@@ -79,7 +88,7 @@
 
                 var tableSchema = {
                     id: "RT_LMP_Final",
-                    alias: conData.date.replace(/\D/g,''),
+                    alias: "RT_LMP_Final",
                     columns: cols
                 };
                 
@@ -125,7 +134,14 @@
                 const result = values.map(vs => Object.fromEntries(vs.map((v, i) => [keys[i], v])));
                 //tableau.log(result.slice(0,4));
                 //console.log(result[0]);
-                table.appendRows(result);
+
+                let row_index = 0;
+                let size = 10000;
+                while (row_index < result.length) {
+                    table.appendRows(result.slice(row_index, size + row_index));
+                    row_index += size;
+                    tableau.reportProgress("Getting row: " + row_index);
+                }
                 doneCallback();
 
             }
@@ -133,7 +149,10 @@
 
     };
 
+    tableau.connectionName = "RT LMP Final";
     tableau.registerConnector(myConnector);
+    window._tableau.triggerInitialization && window._tableau.triggerInitialization();
+
 
     async function _submitToTableau() {
         let date = $("#date").val().trim();
@@ -154,7 +173,6 @@
             date
         });
 
-        tableau.connectionName = "RT LMP Final " + date;
         tableau.submit();
     };
 
