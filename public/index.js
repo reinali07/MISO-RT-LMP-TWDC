@@ -87,8 +87,8 @@
                 const cols = keys.map((k,i) => Object.fromEntries([['id',k],['dataType',datatypes[i]]]));
 
                 var tableSchema = {
-                    id: "RT_LMP_Final_" + conData.date.replace(/\D/g,''),
-                    alias: "RT_LMP_Final_" + conData.date.replace(/\D/g,''),
+                    id: "RT_LMP_Final_"+conData.date.replace(/\D/g,''),
+                    alias: "RT_LMP_Final_"+conData.date.replace(/\D/g,''),
                     columns: cols
                 };
                 
@@ -151,8 +151,6 @@
 
     tableau.connectionName = "RT LMP Final";
     tableau.registerConnector(myConnector);
-    window._tableau.triggerInitialization && window._tableau.triggerInitialization();
-
 
     async function _submitToTableau() {
         let date = $("#date").val().trim();
